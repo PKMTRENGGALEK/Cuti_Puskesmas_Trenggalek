@@ -1,0 +1,115 @@
+<div class="container py-5">
+  <div class="card shadow p-4">
+    <h3 class="mb-4 fw-bold text-center">Input Cuti Pegawai</h3>
+
+    <form id="cutiForm">
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="form-label">Nama Pegawai</label>
+          <input
+            type="text"
+            id="namaKaryawan"
+            name="namaKaryawan"
+            class="form-control"
+            readonly
+          />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">NIP</label>
+          <input
+            type="text"
+            id="nip"
+            name="nip"
+            class="form-control"
+            readonly
+          />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Jabatan</label>
+          <input
+            type="text"
+            id="jabatan"
+            name="jabatan"
+            class="form-control"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label">Jenis Cuti</label>
+          <select id="jenisCuti" name="jenisCuti" class="form-select" required>
+            <option value="">Pilih jenis cuti</option>
+            <option value="Cuti Tahunan">Cuti Tahunan</option>
+            <option value="Cuti Besar">Cuti Besar</option>
+            <option value="Cuti Sakit">Cuti Sakit</option>
+            <option value="Cuti Melahirkan">Cuti Melahirkan</option>
+            <option value="Cuti Penting">Cuti Penting</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Tanggal Mulai</label>
+          <input
+            type="date"
+            id="tglMulai"
+            name="tglMulai"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Tanggal Selesai</label>
+          <input
+            type="date"
+            id="tglSelesai"
+            name="tglSelesai"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-3">
+          <label class="form-label">Lama Cuti (hari)</label>
+          <input
+            type="number"
+            id="lamaCuti"
+            name="lamaCuti"
+            class="form-control"
+            readonly
+          />
+        </div>
+        <div class="col-md-9">
+          <label class="form-label">Alamat Selama Menjalankan Cuti</label>
+          <textarea id="alamat" name="alamat" class="form-control"></textarea>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Keterangan</label>
+        <textarea
+          id="keterangan"
+          name="keterangan"
+          class="form-control"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Nomor Telepon</label>
+        <input type="text" id="noTelp" name="noTelp" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">File Pendukung (opsional)</label>
+        <input type="file" id="filePendukung" class="form-control" />
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-success shadow">
+          <i class="fa fa-paper-plane"></i> Buat Permohonan
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

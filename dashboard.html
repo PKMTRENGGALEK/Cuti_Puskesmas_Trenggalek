@@ -1,0 +1,147 @@
+<div class="row mb-4">
+        <div class="col-md-3 mb-4">
+          <div class="card p-3 text-center">
+            <img
+              id="fotoProfilCard"
+              src="assets/user/Profile.png"
+              alt="Foto Profil"
+              class="rounded-circle mx-auto"
+              style="width: 120px; height: 120px; object-fit: cover"
+            />
+
+            <h6 class="mt-3 mb-0" id="namaPegawaiCard">Nama Pegawai</h6>
+            <!-- <small class="text-muted">Jabatan Pegawai</small> -->
+          </div>
+        </div>
+        <div class="col-md-9">
+          <!-- Dashboard Cards -->
+          <div class="row g-4">
+            <!-- Sisa Cuti -->
+            <div class="col-md-4">
+              <div
+                class="card p-4 text-center position-relative overflow-hidden"
+                style="
+                  background: linear-gradient(135deg, #4ade80, #22d3ee);
+                  color: #fff;
+                "
+              >
+                <i
+                  class="fa-solid fa-calendar-check"
+                  style="font-size: 2rem"
+                ></i>
+                <h5 class="mt-3 fw-semibold">Dashboard</h5>
+                <h2 class="fw-bold" id="sisaCuti">0</h2>
+                <span class="badge bg-white text-dark mt-2" id="cutiTerpakai"
+                  >Cuti Terpakai: 0</span
+                >
+                <div
+                  class="progress mt-3"
+                  style="height: 8px; border-radius: 6px"
+                >
+                  <div
+                    id="cutiProgress"
+                    class="progress-bar bg-success"
+                    style="width: 0%"
+                  ></div>
+                </div>
+                <div
+                  style="
+                    position: absolute;
+                    top: -20px;
+                    right: -20px;
+                    font-size: 4rem;
+                    opacity: 0.2;
+                  "
+                >
+                  <i class="fa-solid fa-calendar-check"></i>
+                </div>
+              </div>
+            </div>
+            <!-- Ajukan Cuti -->
+            <div class="col-md-4">
+              <div
+                class="card p-4 text-center position-relative overflow-hidden"
+                style="
+                  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+                  color: #fff;
+                  cursor: pointer;
+                "
+                onclick="window.location.href='input-cuti.html'"
+              >
+                <i
+                  class="fa-solid fa-pen-to-square"
+                  style="font-size: 2rem"
+                ></i>
+                <h5 class="mt-3 fw-semibold">Ajukan Cuti</h5>
+                <p class="mb-0">Isi form pengajuan cuti</p>
+                <div
+                  style="
+                    position: absolute;
+                    top: -20px;
+                    right: -20px;
+                    font-size: 4rem;
+                    opacity: 0.2;
+                  "
+                >
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+              </div>
+            </div>
+            <!-- Status -->
+            <div class="col-md-4">
+              <div
+                class="card p-4 text-center position-relative overflow-hidden"
+                style="
+                  background: linear-gradient(135deg, #facc15, #f97316);
+                  color: #fff;
+                "
+              >
+                <i
+                  class="fa-solid fa-clock-rotate-left"
+                  style="font-size: 2rem"
+                ></i>
+                <p class="mt-3 fw-semibold">Status Pengajuan Terakhir</p>
+                <p class="mb-0" id="statusPengajuan">Memuat...</p>
+                <div
+                  style="
+                    position: absolute;
+                    top: -20px;
+                    right: -20px;
+                    font-size: 4rem;
+                    opacity: 0.2;
+                  "
+                >
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informasi -->
+      <div class="col-12 mt-4">
+        <div
+          class="card p-4 position-relative overflow-hidden"
+          style="
+            background: linear-gradient(135deg, #da997b, #f12e2e);
+            color: #fff;
+          "
+        >
+          <h5 class="mb-3 fw-semibold">
+            <i class="fa-solid fa-circle-info me-2"></i>Informasi Cuti
+          </h5>
+          <p>Silakan pilih menu di sidebar untuk mulai mengelola cuti Anda.</p>
+          <div
+            style="
+              position: absolute;
+              top: -20px;
+              right: -20px;
+              font-size: 4rem;
+              opacity: 0.15;
+            "
+          >
+            <i class="fa-solid fa-circle-info"></i>
+          </div>
+        </div>
+      </div>

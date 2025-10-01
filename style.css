@@ -1,0 +1,138 @@
+
+      :root {
+        --bg: #f5f7fa;
+        --card: #ffffff;
+        --muted: #6b7280;
+        --border: #e5e7eb;
+        --brand: #45c44c;
+      }
+      body {
+        background: var(--bg);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .sidebar {
+        width: 260px;
+        min-height: 100vh;
+        background: var(--card);
+        border-right: 1px solid var(--border);
+        padding: 2rem 1rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      .sidebar .brand {
+        font-weight: 700;
+        color: #1f2937;
+        letter-spacing: 0.3px;
+      }
+      .menu a {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        margin: 0.25rem 0;
+        color: #374151;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: 0.25s ease;
+        font-weight: 500;
+      }
+      .menu a:hover,
+      .menu a.active {
+        background: var(--brand);
+        color: #fff;
+        transform: translateX(4px);
+      }
+      .offcanvas .menu a {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        margin: 0.25rem 0;
+        color: #374151;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: 0.25s ease;
+        font-weight: 500;
+      }
+      .offcanvas .menu a:hover,
+      .offcanvas .menu a.active {
+        background: var(--brand);
+        color: #fff;
+        transform: translateX(4px);
+      }
+      .content {
+        margin-left: 260px;
+        padding: 2rem;
+        transition: margin-left 0.3s;
+      }
+      .navbar {
+        background: var(--card);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+      }
+      .navbar .brand-title {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-weight: 600;
+      }
+      .hello {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--brand);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        background: var(--card);
+        cursor: default;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      }
+      footer {
+        margin-left: 260px;
+        text-align: center;
+        padding: 1rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+        transition: margin-left 0.3s;
+      }
+      @media (max-width: 991px) {
+        .sidebar {
+          display: none;
+        }
+        .content {
+          margin-left: 0;
+          padding: 1.25rem;
+        }
+        footer {
+          margin-left: 0;
+        }
+        .hello {
+          display: none;
+        }
+      }
+      .badge-baru {
+        font-size: 0.75rem;
+        padding: 0.25em 0.5em;
+        border-radius: 12px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+  
