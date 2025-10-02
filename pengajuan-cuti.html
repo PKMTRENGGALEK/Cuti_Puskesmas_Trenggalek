@@ -1,0 +1,56 @@
+<div class="card p-4">
+  <h5 class="mb-3 fw-semibold">
+    <i class="fa-solid fa-list me-2"></i>Daftar Pengajuan Cuti Pegawai
+  </h5>
+  <div class="table-responsive">
+    <table
+      id="tabelPengajuan"
+      class="table table-striped table-hover table-bordered align-middle shadow-sm"
+      style="width: 100%"
+    >
+      <thead class="table-light">
+        <tr class="text-center" style="font-size: 13px">
+          <th>No</th>
+          <th>Nama Pegawai</th>
+          <th>Jenis Cuti</th>
+          <th>Tanggal Cuti</th>
+          <th>Lama</th>
+          <th>Status</th>
+          <th width="300px">Keterangan</th>
+          <th>File</th>
+          <th>Tanggal Pengajuan</th>
+          <th width="150px">Aksi</th>
+        </tr>
+      </thead>
+      <tbody style="font-size: 13px"></tbody>
+    </table>
+  </div>
+</div>
+<!-- Modal Tolak -->
+<div class="modal fade" id="modalTolak" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Alasan Penolakan Cuti</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="tolakNo" />
+        <div class="mb-3">
+          <label for="alasanTolak" class="form-label"
+            >Masukkan alasan penolakan:</label
+          >
+          <textarea class="form-control" id="alasanTolak" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <button class="btn btn-danger" onclick="submitTolak()">Tolak</button>
+      </div>
+    </div>
+  </div>
+</div>

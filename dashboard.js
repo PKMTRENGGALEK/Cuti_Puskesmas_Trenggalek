@@ -4,23 +4,24 @@ function initDashboard() {
 
   const user = JSON.parse(userData);
   console.log("User data:", user);
-  console.log("Isi kolom pic:", user.pic);
+
+  // --- Elemen DOM ---
   const namaPegawai = document.getElementById("namaPegawai");
   const avatar = document.querySelector(".avatar");
-
   const namaPegawaiCard = document.getElementById("namaPegawaiCard");
   const fotoProfilCard = document.getElementById("fotoProfilCard");
 
-  let picUrl = "assets/user/Profile.png"; // default fallback
+  // --- Foto Profil ---
+  let picUrl = "assets/user/Profile.png";
   if (user.pic && user.pic.trim() !== "") {
     picUrl = `assets/user/${user.pic}`;
   }
   if (namaPegawai) namaPegawai.textContent = user.nama || "Pegawai";
   if (avatar) avatar.textContent = (user.nama || "P").charAt(0).toUpperCase();
-  // untuk card profil di dashboard
   if (namaPegawaiCard) namaPegawaiCard.textContent = user.nama || "Pegawai";
   if (fotoProfilCard) fotoProfilCard.src = picUrl;
 
+  // --- Role & Menu ---
   const role = (user.role || "").toLowerCase();
   const menuPengajuan = document.getElementById("menuPengajuan");
   const menuPengajuanMobile = document.getElementById("menuPengajuanMobile");
@@ -30,26 +31,38 @@ function initDashboard() {
   const bolehAksesPengajuan = role === "admin" || role === "supervisi";
 
   if (!bolehAksesPengajuan) {
-    if (menuPengajuan) menuPengajuan.remove();
-    if (menuPengajuanMobile) menuPengajuanMobile.remove();
-    if (menuRiwayat) menuRiwayat.remove();
-    if (menuRiwayatMobile) menuRiwayatMobile.remove();
+    [
+      menuPengajuan,
+      menuPengajuanMobile,
+      menuRiwayat,
+      menuRiwayatMobile,
+    ].forEach((el) => {
+      if (el) el.remove();
+    });
   }
 
   const cacheKey = "cutiDashboardCache";
 
+  // --- Render Dashboard ---
   function renderDashboard(data) {
-    if (!Array.isArray(data)) data = data.data || [];
-
-    // === Tampilkan menu sesuai role ===
-    if (bolehAksesPengajuan) {
-      if (menuPengajuan) menuPengajuan.style.display = "flex";
-      if (menuPengajuanMobile) menuPengajuanMobile.style.display = "flex";
-      if (menuRiwayat) menuRiwayat.style.display = "flex";
-      if (menuRiwayatMobile) menuRiwayatMobile.style.display = "flex";
+    if (!Array.isArray(data)) {
+      console.warn("Data tidak valid:", data);
+      return;
     }
 
-    // Data milik user
+    // Menu sesuai role
+    if (bolehAksesPengajuan) {
+      [
+        menuPengajuan,
+        menuPengajuanMobile,
+        menuRiwayat,
+        menuRiwayatMobile,
+      ].forEach((el) => {
+        if (el) el.style.display = "flex";
+      });
+    }
+
+    // Filter cuti user
     const semuaCutiPegawai = data.filter(
       (c) =>
         (c["Nama Pegawai"] || "").trim().toLowerCase() ===
@@ -77,6 +90,7 @@ function initDashboard() {
       }
     }
 
+    // Status badge
     const statusMap = {
       Menunggu: "bg-warning text-dark",
       Disetujui: "bg-success",
@@ -101,61 +115,67 @@ function initDashboard() {
         (c["Jenis Cuti"] || "").trim() === "Cuti Tahunan" &&
         (c["Status"] || "").trim() === "Disetujui"
     );
-    let totalTerpakai = 0;
-    userCutiTahunan.forEach((c) => {
-      const lama = parseFloat(c["Lama Cuti"]);
-      totalTerpakai += isNaN(lama) ? 0 : lama;
-    });
 
+    let totalTerpakai = userCutiTahunan.reduce(
+      (sum, c) => sum + (parseFloat(c["Lama Cuti"]) || 0),
+      0
+    );
     const totalCutiTahunan = 12;
     const sisa = Math.max(totalCutiTahunan - totalTerpakai, 0);
-    document.getElementById("sisaCuti").textContent = sisa;
-    document.getElementById(
-      "cutiTerpakai"
-    ).textContent = `Cuti Terpakai: ${totalTerpakai}`;
-    document.getElementById("cutiProgress").style.width =
-      (totalTerpakai / totalCutiTahunan) * 100 + "%";
 
-    // ===== Badge Pengajuan (Realtime) =====
+    const sisaCutiEl = document.getElementById("sisaCuti");
+    const cutiTerpakaiEl = document.getElementById("cutiTerpakai");
+    const cutiProgressEl = document.getElementById("cutiProgress");
+
+    if (sisaCutiEl) sisaCutiEl.textContent = sisa;
+    if (cutiTerpakaiEl)
+      cutiTerpakaiEl.textContent = `Cuti Terpakai: ${totalTerpakai}`;
+    if (cutiProgressEl)
+      cutiProgressEl.style.width =
+        (totalTerpakai / totalCutiTahunan) * 100 + "%";
+
+    // Badge realtime pengajuan
     if (bolehAksesPengajuan) {
-      const pengajuanMenunggu = data.filter((c) => {
-        const st = (c["Status"] || "").toLowerCase();
-        return st.includes("menunggu");
-      }).length;
-
+      const pengajuanMenunggu = data.filter((c) =>
+        (c["Status"] || "").toLowerCase().includes("menunggu")
+      ).length;
       function setBadge(el) {
         if (!el) return;
         const oldBadge = el.querySelector(".badge-baru");
         if (oldBadge) oldBadge.remove();
-
         if (pengajuanMenunggu > 0) {
           const span = document.createElement("span");
           span.className = "badge bg-danger badge-baru ms-auto";
           span.textContent = pengajuanMenunggu;
-
           el.style.display = "flex";
           el.style.alignItems = "center";
           el.style.justifyContent = "space-between";
-
           el.appendChild(span);
         }
       }
       setBadge(menuPengajuan);
       setBadge(menuPengajuanMobile);
     }
-
-    // const loadingOverlay = document.getElementById("loadingOverlay");
-    // if (loadingOverlay) loadingOverlay.style.display = "none";
   }
 
+  // --- Ambil Data dari API ---
   function ambilData() {
-    window.handleCutiData = function (data) {
-      const finalData = Array.isArray(data) ? data : data.data || [];
-      localStorage.setItem(
-        cacheKey,
-        JSON.stringify({ data: finalData, timestamp: Date.now() })
-      );
-      renderDashboard(finalData);
+    window.handleCutiData = function (res) {
+      const finalData = Array.isArray(res) ? res : res.data || [];
+      if (finalData.length > 0) {
+        localStorage.setItem(
+          cacheKey,
+          JSON.stringify({ data: finalData, timestamp: Date.now() })
+        );
+        renderDashboard(finalData);
+      } else {
+        console.warn("Data kosong, pakai cache lama");
+        const cache = localStorage.getItem(cacheKey);
+        if (cache) {
+          const parsed = JSON.parse(cache);
+          renderDashboard(parsed.data || []);
+        }
+      }
     };
 
     const oldScript = document.getElementById("jsonpDashboard");
@@ -171,7 +191,7 @@ function initDashboard() {
     document.body.appendChild(s);
   }
 
-  // Render dari cache
+  // --- Load dari cache dulu ---
   const cache = localStorage.getItem(cacheKey);
   if (cache) {
     try {
@@ -182,16 +202,15 @@ function initDashboard() {
     }
   }
 
-  ambilData();
-  setInterval(() => ambilData(), 10000);
+  ambilData(); // langsung panggil
 }
 
-// Logout global
+// --- Logout Global ---
 function logout() {
   localStorage.removeItem("userData");
   localStorage.removeItem("cutiDashboardCache");
   window.location.href = "index.html";
 }
 
-// ✅ panggil langsung biar jalan walaupun diload dinamis
+// ✅ Panggil langsung
 initDashboard();

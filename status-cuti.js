@@ -29,7 +29,7 @@ function initStatusCuti(options = {}) {
   }
 
   function renderCuti(data) {
-    tbody.innerHTML = "";
+    // tbody.innerHTML = "";
 
     const rows = (Array.isArray(data) ? data : []).filter((c) => {
       const namaRow = (c["Nama Pegawai"] || "").trim().toLowerCase();
@@ -101,31 +101,31 @@ function initStatusCuti(options = {}) {
     hideLoading();
   }
 
-  //   function fetchJsonp(showLoadingFlag = false) {
-  //     if (showLoadingFlag) showLoading();
+  function fetchJsonp(showLoadingFlag = false) {
+    if (showLoadingFlag) showLoading();
 
-  //     const cbName = "handleCutiData_" + Date.now();
-  //     window[cbName] = function (data) {
-  //       const finalData = Array.isArray(data) ? data : data.data || [];
-  //       localStorage.setItem(
-  //         cacheKey,
-  //         JSON.stringify({ data: finalData, timestamp: Date.now() })
-  //       );
-  //       renderCuti(finalData);
-  //       delete window[cbName];
-  //     };
+    const cbName = "handleCutiData_" + Date.now();
+    window[cbName] = function (data) {
+      const finalData = Array.isArray(data) ? data : data.data || [];
+      localStorage.setItem(
+        cacheKey,
+        JSON.stringify({ data: finalData, timestamp: Date.now() })
+      );
+      renderCuti(finalData);
+      delete window[cbName];
+    };
 
-  //     const s = document.createElement("script");
-  //     s.src = SCRIPT_BASE + "?callback=" + cbName + "&_t=" + Date.now();
-  //     s.async = true;
-  //     s.onload = () => s.remove(); // hapus otomatis setelah selesai load
-  //     s.onerror = () => {
-  //       console.error("Gagal load JSONP");
-  //       hideLoading();
-  //       s.remove();
-  //     };
-  //     document.body.appendChild(s);
-  //   }
+    const s = document.createElement("script");
+    s.src = SCRIPT_BASE + "?callback=" + cbName + "&_t=" + Date.now();
+    s.async = true;
+    s.onload = () => s.remove(); // hapus otomatis setelah selesai load
+    s.onerror = () => {
+      console.error("Gagal load JSONP");
+      hideLoading();
+      s.remove();
+    };
+    document.body.appendChild(s);
+  }
 
   // pertama kali load
   const cache = localStorage.getItem(cacheKey);
