@@ -17,13 +17,16 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Tambahkan SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <!-- Sidebar (Desktop) -->
     <aside class="sidebar d-none d-lg-flex flex-column">
       <div class="text-center mb-4">
         <div class="brand">
-          <i class="fa-solid fa-hospital text-success me-2"></i>Puskesmas Trenggalek
+          <i class="fa-solid fa-hospital text-success me-2"></i>Puskesmas
+          Trenggalek
         </div>
       </div>
       <nav class="menu">
@@ -34,7 +37,8 @@
           <i class="fa-solid fa-pen-to-square"></i><span>Input Data Cuti</span>
         </a>
         <a href="#" data-page="status-cuti.html">
-          <i class="fa-solid fa-clock-rotate-left"></i><span>Lihat Status Cuti</span>
+          <i class="fa-solid fa-clock-rotate-left"></i
+          ><span>Lihat Status Cuti</span>
         </a>
         <a href="#" data-page="riwayat-cuti.html" id="menuRiwayat">
           <i class="fa-solid fa-users"></i><span>Riwayat Cuti Pegawai</span>
@@ -54,61 +58,72 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
       <div class="offcanvas-header border-bottom">
         <h5 class="offcanvas-title fw-bold">
-          <i class="fa-solid fa-hospital text-success me-2"></i>Puskesmas Trenggalek
+          <i class="fa-solid fa-hospital text-success me-2"></i>Puskesmas
+          Trenggalek
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+        ></button>
       </div>
       <div class="offcanvas-body">
         <nav class="menu">
-          <a href="#" data-page="dashboard.html" class="active" data-bs-dismiss="offcanvas">
+          <a
+            href="#"
+            data-page="dashboard.html"
+            class="active"
+            data-bs-dismiss="offcanvas"
+          >
             <i class="fa-solid fa-calendar-check"></i><span>Dashboard</span>
           </a>
           <a href="#" data-page="inputcuti.html" data-bs-dismiss="offcanvas">
-            <i class="fa-solid fa-pen-to-square"></i><span>Input Data Cuti</span>
+            <i class="fa-solid fa-pen-to-square"></i
+            ><span>Input Data Cuti</span>
           </a>
           <a href="#" data-page="status-cuti.html" data-bs-dismiss="offcanvas">
-            <i class="fa-solid fa-clock-rotate-left"></i><span>Status Cuti</span>
+            <i class="fa-solid fa-clock-rotate-left"></i
+            ><span>Status Cuti</span>
           </a>
-          <a href="#" data-page="riwayat-cuti.html" id="menuRiwayatMobile" data-bs-dismiss="offcanvas">
+          <a
+            href="#"
+            data-page="riwayat-cuti.html"
+            id="menuRiwayatMobile"
+            data-bs-dismiss="offcanvas"
+          >
             <i class="fa-solid fa-users"></i><span>Riwayat Cuti</span>
           </a>
-          <a href="#" data-page="pengajuan-cuti.html" id="menuPengajuanMobile" data-bs-dismiss="offcanvas">
+          <a
+            href="#"
+            data-page="pengajuan-cuti.html"
+            id="menuPengajuanMobile"
+            data-bs-dismiss="offcanvas"
+          >
             <i class="fa-solid fa-user-check me-2"></i>Pengajuan Cuti
           </a>
 
           <hr class="my-3" />
-          <a href="#" class="text-danger" onclick="logout()" data-bs-dismiss="offcanvas">
+          <a
+            href="#"
+            class="text-danger"
+            onclick="logout()"
+            data-bs-dismiss="offcanvas"
+          >
             <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
           </a>
         </nav>
       </div>
     </div>
-    <div
-        id="loadingOverlay"
-        style="
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(255, 255, 255, 0.8);
-          z-index: 9999;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        "
-      >
-        <div class="d-flex align-items-center text-primary">
-          <div class="spinner-border me-2" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-          Memuat data...
+    
+      <!-- <div class="d-flex align-items-center text-primary">
+        <div class="spinner-border me-2" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-      </div>
+        Memuat data...
+      </div> -->
+    </div>
     <!-- Konten dinamis -->
-    <main class="content">
-      
-    </main>
+    <main class="content"></main>
 
     <footer>
       &copy; 2025 Puskesmas Trenggalek | Sistem Cuti Pegawai | @Yoga
@@ -116,6 +131,11 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+    <script src="status-cuti.js"></script>
     <script src="my.js"></script>
     <script src="init-user.js"></script>
   </body>

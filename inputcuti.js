@@ -2,6 +2,22 @@ function initInputcuti() {
   const SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbzt6xv3yHqeRiTrNcmghTwAq5cgpJ873CF3S4t4XC5qQTa60fcUFILFIdOk9KFaO0o2/exec";
 
+  // tampilkan / sembunyikan upload file sesuai jenis cuti
+  const jenisCutiSelect = document.getElementById("jenisCuti");
+  const filePendukungWrapper = document.getElementById("filePendukungWrapper");
+  const filePendukungInput = document.getElementById("filePendukung");
+
+  jenisCutiSelect.addEventListener("change", function () {
+    if (this.value && this.value !== "Cuti Tahunan") {
+      filePendukungWrapper.style.display = "block";
+      filePendukungInput.required = true;
+    } else {
+      filePendukungWrapper.style.display = "none";
+      filePendukungInput.required = false;
+      filePendukungInput.value = ""; // reset kalau sebelumnya sudah pilih file
+    }
+  });
+
   // ambil data user dari localStorage
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   document.getElementById("namaKaryawan").value = userData.nama || "";
@@ -47,6 +63,9 @@ function initInputcuti() {
     });
 
   async function kirimData(fileBase64 = "", fileName = "") {
+    const submitBtn = document.querySelector("#cutiForm button[type='submit']");
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Mengirim...';
     const data = {
       nip: document.getElementById("nip").value,
       namaPegawai: document.getElementById("namaKaryawan").value,
@@ -69,17 +88,31 @@ function initInputcuti() {
       });
       const result = await res.json();
       if (result.status === "success") {
-        Swal.fire("✅ Sukses", "Pengajuan cuti berhasil disimpan!", "success");
-        document.getElementById("cutiForm").reset();
+        Swal.fire({
+          icon: "success",
+          title: "✅ Sukses",
+          text: "Pengajuan cuti berhasil disimpan!",
+          timer: 2000,
+          showConfirmButton: false,
+        }).then(() => {
+          const form = document.getElementById("cutiForm");
+          form.reset();
+          document.getElementById("namaKaryawan").value = userData.nama || "";
+          document.getElementById("nip").value = userData.nip || "";
+          document.getElementById("jabatan").value = userData.jabatan || "";
+        });
       } else {
         Swal.fire("❌ Gagal", result.message, "error");
       }
     } catch (err) {
       Swal.fire("⚠️ Error", err.message, "error");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa fa-paper-plane"></i> Buat Permohonan';
     }
   }
 }
 
 // 🔥 otomatis jalan begitu file dimuat
-document.addEventListener("DOMContentLoaded", initInputcuti);
+// document.addEventListener("DOMContentLoaded", initInputcuti);
 initInputcuti();

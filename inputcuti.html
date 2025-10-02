@@ -83,7 +83,12 @@
         </div>
         <div class="col-md-9">
           <label class="form-label">Alamat Selama Menjalankan Cuti</label>
-          <textarea id="alamat" name="alamat" class="form-control"></textarea>
+          <textarea
+            id="alamat"
+            name="alamat"
+            class="form-control"
+            required
+          ></textarea>
         </div>
       </div>
 
@@ -93,16 +98,17 @@
           id="keterangan"
           name="keterangan"
           class="form-control"
+          required
         ></textarea>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 col-md-3">
         <label class="form-label">Nomor Telepon</label>
         <input type="text" id="noTelp" name="noTelp" class="form-control" />
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">File Pendukung (opsional)</label>
+      <div class="mb-3" id="filePendukungWrapper" style="display: none">
+        <label class="form-label">File Pendukung (wajib)</label>
         <input type="file" id="filePendukung" class="form-control" />
       </div>
       <div class="text-center">

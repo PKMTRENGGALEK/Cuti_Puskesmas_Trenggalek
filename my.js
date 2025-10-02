@@ -60,9 +60,9 @@ document.addEventListener("click", (e) => {
   const page = link.getAttribute("data-page");
 
   // reset semua menu
-  document.querySelectorAll(".menu a").forEach((a) =>
-    a.classList.remove("active")
-  );
+  document
+    .querySelectorAll(".menu a")
+    .forEach((a) => a.classList.remove("active"));
 
   // aktifkan semua menu dengan data-page yang sama
   document
@@ -74,8 +74,9 @@ document.addEventListener("click", (e) => {
 
 // Default load halaman terakhir
 document.addEventListener("DOMContentLoaded", () => {
-  const lastPage = localStorage.getItem("lastPage") || "dashboard.html";
-  loadPage(lastPage);
+  // const lastPage = localStorage.getItem("lastPage") || "dashboard.html";
+  // loadPage(lastPage);
+  loadPage("dashboard.html");
 });
 
 // Logout

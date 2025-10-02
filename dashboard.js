@@ -144,8 +144,8 @@ function initDashboard() {
       setBadge(menuPengajuanMobile);
     }
 
-    const loadingOverlay = document.getElementById("loadingOverlay");
-    if (loadingOverlay) loadingOverlay.style.display = "none";
+    // const loadingOverlay = document.getElementById("loadingOverlay");
+    // if (loadingOverlay) loadingOverlay.style.display = "none";
   }
 
   function ambilData() {
